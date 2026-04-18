@@ -376,6 +376,58 @@
     font-weight:500;
   }
 
+  .addendum{
+    margin-top:72px;
+    padding-top:36px;
+    border-top:1px dashed var(--rule-soft);
+  }
+  .addendum-label{
+    font-family:var(--ui);
+    font-size:11px;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .addendum-meta{
+    font-family:var(--ui);
+    font-size:12px;
+    letter-spacing:0.1em;
+    color:var(--ink-faint);
+    margin-bottom:24px;
+    font-weight:500;
+  }
+  .addendum h2{
+    font-family:var(--display);
+    font-size:30px;
+    line-height:1.18;
+    font-weight:500;
+    letter-spacing:-0.012em;
+    color:var(--ink);
+    margin-bottom:24px;
+  }
+  .addendum h2 em{
+    font-style:italic;
+    color:var(--accent);
+  }
+  .addendum h3{
+    font-family:var(--display);
+    font-size:22px;
+    line-height:1.25;
+    font-weight:500;
+    letter-spacing:-0.008em;
+    color:var(--ink);
+    margin-top:32px;
+    margin-bottom:14px;
+  }
+  .addendum p{
+    font-size:19px;
+    line-height:1.7;
+    color:var(--ink);
+    margin-bottom:20px;
+  }
+
   .colophon{
     margin-top:72px;
     padding-top:28px;
@@ -528,6 +580,9 @@
     .pullquote-inner, .attribution{padding-left:24px;}
     .section-head h2{font-size:26px;}
     .conclusion h2{font-size:26px;}
+    .addendum h2{font-size:24px;}
+    .addendum h3{font-size:19px;}
+    .addendum p{font-size:17px;}
     .pillar h2{font-size:28px;}
     .pillar-deck{font-size:17px;}
     .callout{padding:22px 20px;}
@@ -767,6 +822,40 @@
   <p>The investment question implied by all three pieces is not whether XRP is undervalued. The investment question is whether the market has correctly priced an architectural transition that, if it occurs, cannot occur smoothly. The current price of any candidate bridge asset &mdash; XRP, competing digital assets, the extended shortlist &mdash; reflects the assumption that the transition does not happen, or happens slowly enough that the current pricing stays accurate. If the assumption is right, the current prices are approximately correct. If the assumption is wrong, no current price is correct, because the intermediate states between "transition doesn't happen" and "transition does happen" are not stable valuation points.</p>
 
   <p class="kicker-line">Some asset will meet the requirements the new architecture imposes. The space of candidates is small. The selection will not be gradual, because the architecture does not permit a gradual transition.</p>
+</div>
+
+<div class="addendum">
+  <div class="addendum-label">Addendum</div>
+  <div class="addendum-meta">Added following reader questions on ODL</div>
+  <h2>On ODL and the <em>hybrid</em> world.</h2>
+
+  <p>A reader raised a clarifying question after publication that is worth addressing directly: how does Ripple's On-Demand Liquidity (ODL) product fit into the collateral framework described in Argument 09? The question surfaced something the article treated implicitly rather than explicitly, and it is worth making the distinction plain, because the distinction has real consequences for how the pricing math actually plays out.</p>
+
+  <h3>Two institutional access models, not one</h3>
+  <p>There are two distinct ways an institution can participate in bridge-asset settlement, and the article conflated them when it shouldn't have. <strong>ODL-mode</strong> is intermediated access: the institution does not hold the bridge asset. A service (in XRP's case, ODL) sources the bridge asset at execution, routes the transaction through it in seconds, and delivers the destination currency. The institution never takes custody of XRP. It touches the asset only at the moment of the transaction, and only through the service. <strong>Hold-mode</strong> is direct access: the institution holds the bridge asset on its own balance sheet, either as a pledgeable reserve for flows it cannot pre-fund through cash or as an operational buffer against settlement obligations it anticipates. The institution takes custody. The asset sits.</p>
+
+  <p>These two models produce different pricing dynamics. ODL-routed flow shows up as <em>flow demand</em> — the volume passing through the asset per the original Part I sizing. It does not remove supply from circulation, because the asset is held for seconds, not months. Hold-mode participation shows up as <em>collateral demand</em> — supply taken out of the tradeable float per Argument 09's reflexive loop. A world composed entirely of ODL users does not fire the collateral reflexivity hard. A world composed entirely of direct holders does not generate the flow volume the original Part I framework anchored on. Neither extreme is likely. The realistic outcome is a hybrid.</p>
+
+  <h3>Why the hybrid is the likely equilibrium</h3>
+  <p>Different institutions have different operational preferences, different regulatory constraints, and different treasury philosophies. A useful rough partition: SMEs and smaller banks use ODL by default because they lack the infrastructure to hold crypto directly and the regulatory cost of doing so is high. Mid-tier corporates and regional banks likely prefer ODL for capital efficiency — they get access without the working-capital drag of an XRP position on their balance sheet. Tier-1 banks, large asset managers, and compliance-capable intermediaries lean toward direct holdings, because their volume justifies the operational investment and because sovereignty over their own settlement capacity is strategically valuable. Central banks and sovereign wealth funds, if they participate at all, participate almost exclusively through direct holdings, because their entire reason for adopting a neutral bridge is to control the access themselves rather than route through a commercial intermediary.</p>
+
+  <p>That partition is illustrative, not precise. But the structural point is that no single access model captures the whole market. The mix between ODL-mode and hold-mode determines where in the Part III price range a bridge asset actually lands.</p>
+
+  <h3>The nostro-vostro comparison</h3>
+  <p>A sharper version of the question some readers have raised: if institutions have to hold a bridge asset as collateral anyway, how is this different from the nostro-vostro account structure that correspondent banking already uses? The answer sits in a structural distinction that matters more than it first appears.</p>
+
+  <p>Nostro-vostro accounts are pre-positioned holdings of <em>counterparty currency</em> maintained in specific bilateral corridors — a US bank holds euros at a German bank to facilitate EUR-denominated settlements, holds yen at a Japanese bank for JPY settlements, and so on. Each corridor requires its own account, its own capital allocation, and its own ongoing management. The capital drag scales linearly with the number of corridors served. A bank operating in fifty currency pairs maintains fifty sets of nostro-vostro relationships.</p>
+
+  <p>Holding a neutral bridge asset is different. One held position provides omnidirectional access — the same XRP reserve can settle into any destination currency on the network, because the bridge routes through it rather than sitting as a corridor-specific buffer. This is structurally closer to holding a reserve currency than to holding counterparty positions. The capital drag does not scale linearly with corridors served. It scales with total settlement capacity, independent of which specific corridors the capacity is used for.</p>
+
+  <p>This is why the held-collateral concept is not a reinvention of nostro-vostro under a different name. It is a different operational architecture, and the capital-efficiency math is different. A bank that previously needed fifty counterparty-currency positions can replace a portion of that footprint with a single bridge-asset reserve of equivalent settlement capacity. That substitution is what makes the institutional economics work at scale.</p>
+
+  <h3>What this means for the Part III framework</h3>
+  <p>The collateral reflexivity argument in Argument 09 applies to the hold-mode share of institutional participation, not to the ODL-mode share. The 10%, 20%, and 30% supply-lock scenarios should be read as applying to the portion of the institutional market that takes direct custody — not the whole market. What share of institutions will choose hold-mode over ODL-mode is an empirical question that will not be resolved until adoption actually scales. The realistic hybrid is somewhere between the two extremes. The pricing consequence lands somewhere between "flow-sizing alone" and "full reflexive lock-up."</p>
+
+  <p>What evidence would tell us which mix is forming? ODL corridor volume growth is one signal — it indicates the ODL-mode share expanding. Institutional custody announcements and regulated XRP treasury allocations are the counter-signal — they indicate the hold-mode share expanding. The ratio of on-exchange volume to off-exchange institutional transfers is another useful indicator. None of these signals will be definitive in isolation, but the direction of travel will be observable in the data as adoption matures.</p>
+
+  <p>The article's central conclusion stands: some asset will meet the requirements the new architecture imposes, the space of candidates is small, and the selection will not be gradual. This addendum clarifies that even within the bridge-asset role, institutional access splits into two structurally different models, and the blend between them is itself a variable the article's pricing framework depends on. It is worth naming explicitly. Readers were right to ask.</p>
 </div>
 
 <div class="colophon">
